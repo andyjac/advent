@@ -59,9 +59,7 @@ function findSmallestTwoSides(sides) {
     return a - b;
   });
 
-  sorted.pop();
-
-  return sorted;
+  return [sorted[0], sorted[1]];
 }
 
 function calculateSmallestPerimeter(sides) {
