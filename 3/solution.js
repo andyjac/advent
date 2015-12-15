@@ -7,25 +7,25 @@ init('input.txt', [
 // part 1
 
 function countHousesVisited(input) {
-  var currentCoord = [0, 0];
-  var housesVisited = {};
+  var loc = [0, 0];
+  var visited = {};
   var count = 0;
 
   input.split('').forEach(function(char) {
     var direction = char.toLowerCase();
 
     if (direction === '^') {
-      currentCoord[0] += 1;
+      loc[0] += 1;
     } else if (direction === '>') {
-      currentCoord[1] += 1;
+      loc[1] += 1;
     } else if (direction === 'v') {
-      currentCoord[0] -=1;
+      loc[0] -=1;
     } else if (direction === '<') {
-      currentCoord[1] -=1;
+      loc[1] -=1;
     }
 
-    if (!housesVisited[currentCoord.join(':')]) {
-      housesVisited[currentCoord.join(':')] = 1;
+    if (!visited[loc.join(',')]) {
+      visited[loc.join(',')] = 1;
       count++;
     }
   });
