@@ -21,7 +21,6 @@ function countNiceStrings(input) {
 function isNiceString(string) {
   var numVowels = 0;
   var foundTwoInARow = false;
-  var i = 0;
 
   for (var i = 0; i < string.length; i++) {
     var charA = string[i];
