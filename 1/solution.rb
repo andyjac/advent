@@ -41,9 +41,5 @@ def find_basement_position(chars)
   position
 end
 
-
-current_floor = get_current_floor(input)
-puts current_floor
-
-basement_position = find_basement_position(input)
-puts basement_position
+puts "Part 1: #{get_current_floor(input)}"
+puts "Part 2: #{find_basement_position(input)}"

@@ -1,7 +1,6 @@
 require "../shared/read_file.rb"
 
-FILE_NAME = "input.txt"
-input = read_file(FILE_NAME)
+input = read_file("input.txt")
 
 # part 1
 
@@ -83,3 +82,6 @@ def parse_present_dimension(present)
     height: present_dimensions[2].to_i
   }
 end
+
+puts "Part 1: #{calculate_wrapping_paper_sum(input)}"
+puts "Part 2: #{calculate_ribbon_sum(input)}"

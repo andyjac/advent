@@ -1,8 +1,7 @@
 require "../shared/read_file.rb"
 require "set"
 
-FILE_NAME = "input.txt"
-input = read_file(FILE_NAME)
+input = read_file("input.txt")
 
 def count_houses_visited(input, num_santas = 1)
   visited = Set.new

@@ -1,7 +1,6 @@
 var init = require('../shared/init');
-var FILE_NAME = 'input.txt';
 
-init(FILE_NAME, [
+init('input.txt', [
   countHousesVisited,
   { fn: countHousesVisited, args: [2] }
 ]);
