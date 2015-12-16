@@ -11,17 +11,17 @@ def count_houses_visited(input, num_santas = 1)
   input.each_char.with_index do |char, i|
     loc = santa_tracker[i % num_santas];
 
-    if char === '^'
+    if char === "^"
       loc[0] += 1
-    elsif char === 'v'
+    elsif char === "v"
       loc[0] -= 1
-    elsif char === '>'
+    elsif char === ">"
       loc[1] += 1
-    elsif char === '<'
+    elsif char === "<"
       loc[1] -= 1
     end
 
-    visited.add(loc.join(','))
+    visited.add(loc.join(","))
   end
 
   visited.size
@@ -30,7 +30,7 @@ end
 # helpers
 
 def build_santa_tracker(n)
-  santa_tracker = {}
+  santa_tracker = Hash.new
 
   n.times do |n|
     santa_tracker[n] = [0, 0]
@@ -38,3 +38,6 @@ def build_santa_tracker(n)
 
   santa_tracker
 end
+
+puts "Part 1: #{count_houses_visited(input)}"
+puts "Part 2: #{count_houses_visited(input, 2)}"
