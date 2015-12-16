@@ -1,12 +1,18 @@
-module.exports = function(input, fns) {
+module.exports = function(input, specs) {
   var results = [];
 
-  fns.forEach(function(fn) {
-    if (typeof fn !== 'function') {
-      throw new Error('fn must be a function!');
+  specs.forEach(function(spec, i) {
+    if (typeof spec === 'function') {
+      var fn = spec;
+
+      return results.push(fn(input));
     }
 
-    results.push(fn(input));
+    var fn = spec.fn;
+    var args = spec.args;
+    args.unshift(input);
+
+    results.push(fn.apply(null, args));
   });
 
   return results;
