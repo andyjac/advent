@@ -1,34 +1,41 @@
 var init = require('../shared/init');
+var FILE_NAME = 'input.txt';
 
-init('input.txt', [
-  countHousesVisited
+init(FILE_NAME, [
+  countHousesVisited,
+  { fn: countHousesVisited, args: [2] }
 ]);
 
-// part 1
+function countHousesVisited(input, numSanatas) {
+  var numSanatas = numSanatas || 1;
+  var santaTracker = buildSantaTracker(numSanatas);
+  var visited = new Set();
 
-function countHousesVisited(input) {
-  var loc = [0, 0];
-  var visited = {};
-  var count = 0;
+  input.split('').forEach(function(char, i) {
+    var loc = santaTracker[i % numSanatas];
+    loc = directionMap[char](loc);
 
-  input.split('').forEach(function(char) {
-    var direction = char.toLowerCase();
-
-    if (direction === '^') {
-      loc[0] += 1;
-    } else if (direction === '>') {
-      loc[1] += 1;
-    } else if (direction === 'v') {
-      loc[0] -=1;
-    } else if (direction === '<') {
-      loc[1] -=1;
-    }
-
-    if (!visited[loc.join(',')]) {
-      visited[loc.join(',')] = 1;
-      count++;
-    }
+    visited.add(loc.join(','));
   });
 
-  return count;
+  return visited.size;
 }
+
+// helpers
+
+function buildSantaTracker(n) {
+  var santaTracker = {};
+
+  for (var i = 0; i < n; i++) {
+    santaTracker[i] = [0, 0];
+  }
+
+  return santaTracker;
+}
+
+var directionMap = {
+  '^': function(loc) { return [++loc[0], loc[1]]; },
+  'v': function(loc) { return [--loc[0], loc[1]]; },
+  '>': function(loc) { return [loc[0], ++loc[1]]; },
+  '<': function(loc) { return [loc[0], --loc[1]]; }
+};
