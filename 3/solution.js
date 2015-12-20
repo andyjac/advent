@@ -8,25 +8,44 @@ init('input.txt', [
 function countHousesVisited(input, numSanatas) {
   var numSanatas = numSanatas || 1;
   var santaTracker = buildSantaTracker(numSanatas);
-  var visited = new Set();
 
   input.split('').forEach(function(char, i) {
-    var loc = santaTracker[i % numSanatas];
-    loc = directionMap[char](loc);
+    var santa = santaTracker[i % numSanatas];
+    var currentLoc = santa.currentLoc;
+    currentLoc = directionMap[char](currentLoc);
 
-    visited.add(loc.join(','));
+    santa.visited.add(currentLoc.join(','));
   });
 
-  return visited.size;
+  return zipSantas(santaTracker).size;
 }
 
 // helpers
+
+function zipSantas(santas) {
+  var keys = Object.keys(santas);
+
+  if (keys.length === 1) {
+    return santas["0"].visited;
+  }
+
+  return new Set(
+    keys.reduce(function(arr, id) {
+      var visited = santas[id].visited;
+
+      return arr.concat([...visited]);
+    }, [])
+  );
+}
 
 function buildSantaTracker(n) {
   var santaTracker = {};
 
   for (var i = 0; i < n; i++) {
-    santaTracker[i] = [0, 0];
+    santaTracker[i] = {
+      currentLoc: [0, 0],
+      visited: new Set()
+    };
   }
 
   return santaTracker;
