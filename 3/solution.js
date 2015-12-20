@@ -5,12 +5,12 @@ init('input.txt', [
   { fn: countHousesVisited, args: [2] }
 ]);
 
-function countHousesVisited(input, numSanatas) {
-  var numSanatas = numSanatas || 1;
-  var santaTracker = buildSantaTracker(numSanatas);
+function countHousesVisited(input, numSantas) {
+  var numSantas = numSantas || 1;
+  var santaTracker = buildSantaTracker(numSantas);
 
   input.split('').forEach(function(char, i) {
-    var santa = santaTracker[i % numSanatas];
+    var santa = santaTracker[i % numSantas];
     var currentLoc = santa.currentLoc;
     currentLoc = directionMap[char](currentLoc);
 
